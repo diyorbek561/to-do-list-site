@@ -67,7 +67,7 @@ function addToDo(event) {
 }   
 
 
-function deletecheck(even){
+functio deletecheck(event){
 
     // console.log(event.target);
     const item = event.target;
