@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+      - name: Install dependicies
+        run: npm ci
       - name: Checkout JS/main.js's code
         run: node --check JS/main.js
       - name: Checkout JS/time.js's code
@@ -26,7 +29,15 @@ jobs:
     needs: test-code
     runs-on: ubuntu-latest
     steps:
-      - name: Build job
-        run: echo "Build job successfuly"
-      - name: Build code
-        run: echo "Build code success !"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 20
+          cache: npm
+      - name: Install dependicies
+        run: npm ci
+      - name: Build 
+        run: echo "Build ishladi"
