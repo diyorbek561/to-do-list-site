@@ -21,7 +21,9 @@ jobs:
         run: node --check JS/main.js
       - name: Checkout JS/time.js's code
         run: node --check JS/time.js
+  
   build-code:
+    needs: test-code
     runs-on: ubuntu-latest
     steps:
       - name: Build job
