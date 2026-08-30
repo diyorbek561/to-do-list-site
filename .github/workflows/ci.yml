@@ -40,4 +40,4 @@ jobs:
       - name: Install dependicies
         run: npm ci
       - name: Build 
-        run: echo "Build ishladi - cache test"
+        run: echo "Build ishladi - cache test 2"
