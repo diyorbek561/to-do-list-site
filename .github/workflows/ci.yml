@@ -1,43 +1,77 @@
 name: Frontend CI pipline
 
 on:
+  
   push:
     branches:
       - main
+  
   pull_request:
     branches:
       - main
+
 jobs:
+  
   test-code:
+    
     runs-on: ubuntu-latest
+    
     steps:
+    
       - name: Checkout code
         uses: actions/checkout@v4
+    
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+      
       - name: Install dependicies
         run: npm ci
+      
       - name: Checkout JS/main.js's code
         run: node --check JS/main.js
+      
       - name: Checkout JS/time.js's code
         run: node --check JS/time.js
+      
+      - name: Create test result
+        run: echo "Test succesfully" > test-result.txt
+      
+      - name: Upload test result
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-result
+          path: test-result.txt
   
   build-code:
+    
     needs: test-code
+    
     runs-on: ubuntu-latest
+    
     steps:
+      
       - name: Checkout code
         uses: actions/checkout@v4
-
+ 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with: 
           node-version: 20
           cache: npm
+      
+      - name: Download test result
+        uses: actions/download-artifact@v4
+        with:
+          name: test-result
+      
+      - name: Show test result
+        run: cat test-result.txt
+          
       - name: Install dependicies
         run: npm ci
+      
       - name: Build 
         run: echo "Build ishladi - cache test 2"
