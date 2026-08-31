@@ -19,7 +19,7 @@ jobs:
       APP_NAME: todo-site
     steps:
       - name: Show app name
-        run: echo "Application: $APP_NAME"
+        run: echo "Application:" $APP_NAME
         
       - name: Checkout code
         uses: actions/checkout@v4
