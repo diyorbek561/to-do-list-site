@@ -17,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_NAME: todo-site
+    strategy: 
+          matrix:
+            node-version: [20,22,24]
     steps:
       - name: Show app name
         run: echo "Application:" $APP_NAME
@@ -26,12 +29,13 @@ jobs:
     
       - name: Setup Node.js
         uses: actions/setup-node@v4
+
         with:
-          node-version: 20
+          node-version: ${{matrix.node-version}}
           cache: npm
       - name: Test secret
         run: echo "Test secret bor:" ${{secrets.MY_SECRET}}
-        
+
       - name: Install dependicies
         run: npm ci
       
