@@ -29,7 +29,9 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      
+      - name: Test secret
+        run: echo "Test secret bor:" ${{secrets.MY_SECRET}}
+        
       - name: Install dependicies
         run: npm ci
       
